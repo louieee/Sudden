@@ -38,7 +38,9 @@ SHARED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shared'
+    'shared',
+    "rest_framework",
+    "rest_framework.authtoken"
 )
 
 TENANT_APPS = (
@@ -48,7 +50,9 @@ TENANT_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tenant'
+    'tenant',
+    "rest_framework",
+    "rest_framework.authtoken"
 )
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
@@ -91,10 +95,11 @@ WSGI_APPLICATION = 'Sudden.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': os.environ.get('PG_DATABASE', 'sudden'),
-        'USER': os.environ.get('PG_USER', 'postgres'),
-        'PASSWORD': os.environ.get('PG_PASSWORD', 'MONKEYSex'),
-        'HOST': 'localhost',
+        'NAME': os.environ.get('POSTGRES_DB', 'sudden'),
+        'USER': os.environ.get('P0STGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'MONKEYSex'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }
 }
 

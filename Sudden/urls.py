@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from Sudden.views import Signup, Login, home
+
 urlpatterns = [
+    path('', home),
     path('admin/', admin.site.urls),
+    path('api/signup/', Signup.as_view()),
+    path('api/login/', Login.as_view()),
 ]

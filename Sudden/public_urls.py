@@ -15,9 +15,13 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-# from core.views import MainView
+from .views import Signup, Login, ClientSignup, home
 from django.urls import path
 
 urlpatterns = [
+    path('', home),
     path('admin/', admin.site.urls),
+    path('api/signup/', Signup.as_view()),
+    path('api/login/', Login.as_view()),
+    path('api/client/signup/', ClientSignup.as_view())
 ]
