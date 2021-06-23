@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 
 from customer.serializer import ClientSerializer
 from utilities.api_response import APIFailure, APISuccess
+from utilities.mixins import APIRequiredMixin
 from utilities.python_utils import get_schema
 
 from .serializer import UserSerializer
@@ -70,20 +71,14 @@ class Signup(APIView):
         return APISuccess('User created successfully', json_, status.HTTP_201_CREATED)
 
 
-class ClientSignup(APIView):
+class ClientSignup(APIView, APIRequiredMixin):
     permission_classes = [AllowAny]
-
-    # {
-    # REQUEST DATA FORM
-    #     username
-    #     email
-    #     password
-    #     client
-    #     domain_url,
-    # }
+    required_fields = ('username', 'email', 'password', 'name', 'domain_url')
 
     def post(self, request):
         json_ = {}
+        if not self.check_required(request):
+            return self.error_response()
         client_serializer = ClientSerializer(data=request.data, context=request.data.get('domain_url'))
         if client_serializer.is_valid():
             client = client_serializer.save()
