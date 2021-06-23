@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
-from django_tenants.utils import schema_context
+from django_tenants.utils import schema_context, tenant_context
 from rest_framework import serializers
+
+from customer.models import Client
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -10,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
-        with schema_context(self.context['schema']):
+        with tenant_context(Client.objects.get(schema_name=self.context['schema'])):
             if self.context['title'] == 'superuser':
                 user = User.objects.create_superuser(email=validated_data["email"], username=validated_data["username"],
                                                      password=validated_data["password"])

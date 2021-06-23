@@ -1,10 +1,10 @@
-POST http://localhost:8000/api/client/signup/
+POST http://localhost:5456/api/client/signup/
 Content-Type: application/json
 
 {
-  "name": "Hilton Hotels",
-  "domain_url": "hilton.localhost",
-  "username": "Louis",
+  "name": "Princeton Hotels",
+  "domain_url": "princeton.localhost",
+  "username": "Admin",
   "email": "louis@gmail.com",
   "password": "PASSWORD"
 }

@@ -87,18 +87,20 @@ class ClientSignup(APIView, APIRequiredMixin):
             else:
                 return APIFailure(client_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             context = {"schema": client.schema_name, 'title': 'superuser'}
-            serializer = UserSerializer(data=request.data, context=context)
-            if serializer.is_valid():
-                user = serializer.save()
-                if user:
-                    token, _ = Token.objects.get_or_create(user=user)
-                    json_.update(serializer.data)
-                    json_['token'] = token.key
+            with schema_context(client.schema_name):
+                serializer = UserSerializer(data=request.data, context=context)
+                if serializer.is_valid():
+                    with schema_context(client.schema_name):
+                        user = serializer.save()
+                        if user:
+                            token, _ = Token.objects.get_or_create(user=user)
+                            json_.update(serializer.data)
+                            json_['token'] = token.key
+                        else:
+                            return APIFailure(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     return APIFailure(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            else:
-                return APIFailure(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            return APISuccess('User created successfully', json_, status.HTTP_201_CREATED)
+                return APISuccess('User created successfully', json_, status.HTTP_201_CREATED)
         else:
             return APIFailure(client_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
