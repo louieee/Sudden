@@ -17,9 +17,12 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 
 class Room(models.Model):
-    number = models.IntegerField(default=0)
+    number = models.PositiveIntegerField(default=0)
     type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
     price = models.DecimalField(default=0, max_digits=12, decimal_places=2)
+
+    def __str__(self):
+        return f'Room {self.number}'
 
 
 class ContactInfo(models.Model):

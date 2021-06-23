@@ -1,9 +1,8 @@
+from Sudden import settings
 from customer.models import Client
 
-public = 'localhost:8000'
 
-
-def get_schema(request):
+def get_schema(request, public=settings.DOMAIN):
     schema = request.META.get('HTTP_X_DTS_SCHEMA', None)
     if schema is None:
         host = request.get_host().split(public)[0][:-1]

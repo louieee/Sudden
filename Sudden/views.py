@@ -2,7 +2,6 @@ from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django_tenants.utils import schema_context
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND

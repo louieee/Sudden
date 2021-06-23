@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from decouple import config
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -69,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+DOMAIN = os.environ.get('DOMAIN', config('DOMAIN', default='localhost:8000'))
 
 ROOT_URLCONF = 'Sudden.urls'
 PUBLIC_SCHEMA_URLCONF = 'Sudden.public_urls'
