@@ -42,7 +42,8 @@ SHARED_APPS = (
     'django.contrib.staticfiles',
     'shared',
     "rest_framework",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    'django_inlinecss',
 )
 
 TENANT_APPS = (
@@ -54,7 +55,8 @@ TENANT_APPS = (
     'django.contrib.staticfiles',
     'tenant',
     "rest_framework",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    'django_inlinecss',
 )
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
 
@@ -144,7 +146,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -156,3 +157,10 @@ TENANT_USERS_DOMAIN = "example.com"
 SESSION_COOKIE_DOMAIN = None
 
 SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'Deut/static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

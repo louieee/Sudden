@@ -37,6 +37,7 @@ class ContactInfo(models.Model):
 class Booking(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    expired = models.BooleanField(default=False)
     time_in = models.DateTimeField()
     time_out = models.DateTimeField()
 
@@ -45,3 +46,38 @@ class Booking(models.Model):
 
     def vacant(self):
         return self.time_out < timezone.now()
+
+
+class Mail(models.Model):
+    name = models.CharField(default='', max_length=50)
+
+    template = models.ForeignKey('shared.EmailTemplate',
+                                 on_delete=models.SET_NULL, null=True, default=None)
+    subject = models.CharField(max_length=255, default='')
+    sender_email = models.EmailField()
+    sender_name = models.CharField(max_length=50, default='')
+    recipients = models.JSONField()
+    attachments = models.JSONField(blank=True)
+    cc = models.JSONField(default=None, null=True, blank=True)
+    bcc = models.JSONField(default=None, null=True, blank=True)
+    context = models.JSONField()
+
+    def __str__(self):
+        return self.name
+
+    def send(self):
+        context = dict(self.context)
+        if self.cc:
+            context['cc'] = self.cc
+        if self.bcc:
+            context['bcc'] = self.bcc
+        context['subject'] = self.subject
+        context['sender_email'] = self.sender_email
+        context['sender_name'] = self.sender_name
+        context['recipients'] = self.recipients
+        context['attachments'] = self.attachments
+        if self.template is not None:
+            self.template.context = context
+            self.template.send()
+        else:
+            print('Email not sent. Template no longer exists.')
