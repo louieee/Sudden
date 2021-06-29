@@ -1,0 +1,32 @@
+POST http://localhost:5456/api/client/signup/
+Content-Type: application/json
+
+{
+  "name": "Princeton Hotels",
+  "domain_url": "princeton.localhost",
+  "username": "Admin",
+  "email": "louis@gmail.com",
+  "password": "PASSWORD"
+}
+
+###
+
+POST http://localhost:8000/api/signup/
+Content-Type: application/json
+
+{
+  "username": "Admin",
+  "email": "louis@gmai.com",
+  "password": "PASSWORD",
+  "title": "superuser"
+}
+
+###
+
+POST http://hilton.localhost:8000/api/login/
+Content-Type: application/json
+
+{
+  "username": "Louis",
+  "password": "PASSWORD"
+}

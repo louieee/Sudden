@@ -1,0 +1,17 @@
+
+*.log
+*.pot
+*.pyc
+_pycache_/
+local_settings.py
+*.sqlite3
+media
+my_venv
+.env
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
+.idea/
+.vscode
+docker-compose.yml
+production.http

@@ -1,0 +1,49 @@
+{% load inlinecss %}
+{% inlinecss "css.css" %}
+<html lang="en">
+<head>
+    <title>Welcome Email</title>
+</head>
+<body class="container-fluid text-dark">
+    <div class="row">
+        <div id="header" class="col-sm-12">
+            <div class="bg-light p-3">
+                <div class="d-flex mb-3">
+                    <div class="d-inline bg-white p-1 border border-dark border-5" style="border-radius: 200px !important;">
+                         <h4 class="font-weight-bold text-danger">De<span class="text-dark h6">ut</span></h4>
+                    </div>
+                </div>
+                <hr/>
+                <h2>Welcome to {{ school_name }}  {{ receiver_name }}!</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos placeat praesentium quo? Aperiam asperiores excepturi nulla optio reprehenderit sint suscipit. Ad, adipisci asperiores commodi consectetur dicta excepturi nobis quisquam rerum!</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="body" class="col-sm-12">
+            <div class="p-3" style="font-size: 16px !important;">
+                <p>Dear {{ receiver_name }}, </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam dolorem doloribus dolorum eius fuga,
+                    ipsum, labore laboriosam maxime minima nam neque omnis pariatur provident quas
+                    quidem ratione sint voluptatum.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque, aut consequatur culpa cum cupiditate dolorum ea,
+                    eos error fuga impedit incidunt modi molestiae, obcaecati odit quod quos ullam voluptatum!
+                </p>
+            </div>
+            <div class="p-3 mt-2 font-weight-bold">
+                <hr/>
+                <p class="font-weight-normal">Cheers,</p>
+                <p>{{ school_name }} Admin.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="footer" class="bg-light col-sm-12 p-3 text-center">
+            <p>Don't want to receive our emails, you can unsubscribe with the button below</p>
+            <a href="{{ unsubscribe_link }}" class="btn btn-danger mb-3">Unsubscribe</a>
+            <p class="font-weight-bold">Email from <span class="text-secondary">{{ school_name }}<span class="text-danger">@{{ current_year }}</span></span></p>
+        </div>
+    </div>
+</body>
+</html>
+{% endinlinecss %}

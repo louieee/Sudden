@@ -1,0 +1,1 @@
+python manage.py makemigrations && python manage.py migrate_schemas --shared && python manage.py migrate_schemas && python manage.py runserver 0.0.0.0:9009
