@@ -1,5 +1,5 @@
 {% load inlinecss %}
-{% inlinecss "bootstrap4\css\bootstrap.css" %}
+{% inlinecss "css.css" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +19,8 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos placeat praesentium quo? Aperiam asperiores excepturi nulla optio reprehenderit sint suscipit. Ad, adipisci asperiores commodi consectetur dicta excepturi nobis quisquam rerum!</p>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div id="body" class="col-sm-12">
             <div class="p-3" style="font-size: 16px !important;">
                 <p>Dear {{ receiver_name }}, </p>
@@ -33,13 +35,13 @@
                 <p>{{ school_name }} Admin.</p>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div id="footer" class="bg-light col-sm-12 p-3 text-center">
             <p>Don't want to receive our emails, you can unsubscribe with the button below</p>
             <a href="{{ unsubscribe_link }}" class="btn btn-danger mb-3">Unsubscribe</a>
             <p class="font-weight-bold">Email from <span class="text-secondary">@{{ school_name }}<span class="text-danger">{{ current_year }}</span></span></p>
         </div>
-
-
     </div>
 </body>
 </html>
