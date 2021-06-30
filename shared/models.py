@@ -32,7 +32,7 @@ class EmailTemplate(models.Model):
     html = models.SmallIntegerField(choices=HtmlTemplate.choices, default=None, null=True)
     html_body = models.TextField(default='', blank=True)
     template_context = models.JSONField()
-    required_context = ('subject', 'sender_email', 'sender_name', 'recipients', 'attachments',)
+    required_context = ('subject', 'sender_email', 'sender_name', 'recipients', 'attachments')
     context = {}
 
     def __str__(self):
@@ -62,8 +62,8 @@ class EmailTemplate(models.Model):
 
     def context_complete(self, ):
         required = self.template_context + list(self.required_context)
-        check_context = [self.context.get(x, None) for x in required if self.context.get(x, None) is None]
-        return check_context.__len__() == 0
+        check_context = [x for x in required if x not in self.context]
+        return check_context
 
     def get_recipients(self):
         return self.context.get('to', [])
@@ -73,13 +73,14 @@ class EmailTemplate(models.Model):
         return [at for at in attachments if os.path.exists(at)]
 
     def send(self):
-        if self.context_complete():
+        req = self.context_complete()
+        if req.__len__() == 0:
             from_ = f"{self.context['sender_name']}<{self.context['sender_email']}>"
             html_body = self.get_html_body()
             send_email(from_, self.context['subject'], self.context['recipients'], html_body,
                        bcc=self.context.get('bcc', None), cc=self.context.get('cc', None),
                        attachments=self.context.get('attachments', None))
         else:
-            raise Exception(f"Required context fields are: {', '.join(self.template_context + list(self.required_context))} ")
+            raise Exception(f"Missing context fields are: {', '.join(req)} ")
 
 
