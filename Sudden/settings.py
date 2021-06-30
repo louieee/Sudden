@@ -100,11 +100,11 @@ WSGI_APPLICATION = 'Sudden.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': os.environ.get('POSTGRES_DB', 'sudden'),
-        'USER': os.environ.get('P0STGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'MONKEYSex'),
+        'NAME': os.environ.get('POSTGRES_DB', config( 'POSTGRES_DB')),
+        'USER': os.environ.get('P0STGRES_USER', config( 'POSTGRES_USER')),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', config( 'POSTGRES_PASSWORD')),
         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        'PORT': os.environ.get('POSTGRES_PORT', config( 'POSTGRES_PORT')),
     }
 }
 
