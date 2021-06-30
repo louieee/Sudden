@@ -73,7 +73,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-DOMAIN = os.environ.get('DOMAIN', config('DOMAIN', default='localhost:9000'))
+DOMAIN = os.environ.get('DOMAIN', config('DOMAIN', default='localhost:8000'))
 
 ROOT_URLCONF = 'Sudden.urls'
 PUBLIC_SCHEMA_URLCONF = 'Sudden.public_urls'
@@ -102,7 +102,7 @@ DATABASES = {
         'ENGINE': 'django_tenants.postgresql_backend',
         'NAME': os.environ.get('POSTGRES_DB', 'sudden'),
         'USER': os.environ.get('P0STGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'Siri@123'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'MONKEYSex'),
         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }

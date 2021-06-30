@@ -80,6 +80,6 @@ class EmailTemplate(models.Model):
                        bcc=self.context.get('bcc', None), cc=self.context.get('cc', None),
                        attachments=self.context.get('attachments', None))
         else:
-            raise Exception(f"Required context fields are: {', '.join(self.required_context)} ")
+            raise Exception(f"Required context fields are: {', '.join(self.template_context + list(self.required_context))} ")
 
 
